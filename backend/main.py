@@ -9,15 +9,29 @@ import database
 app = FastAPI(title="CardioRisk AI — Heart Disease Risk API")
 
 # ── CORS ─────────────────────────────────────────────────────────────────────
-# FRONTEND_URL is set as an environment variable on Render.
-# Falls back to "*" for easy local development.
 FRONTEND_URL = os.getenv("FRONTEND_URL", "*")
-origins = ["*"] if FRONTEND_URL == "*" else [FRONTEND_URL, "http://localhost:5173"]
+
+allowed_origins = [
+    "https://heart-disease-prediction-zeta.vercel.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+if FRONTEND_URL != "*":
+    cleaned_url = FRONTEND_URL.strip().rstrip("/")
+    if cleaned_url not in allowed_origins:
+        allowed_origins.append(cleaned_url)
+    # Also support trailing slash origin just in case
+    slash_origin = cleaned_url + "/"
+    if slash_origin not in allowed_origins:
+        allowed_origins.append(slash_origin)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=allowed_origins if FRONTEND_URL != "*" else ["*"],
+    allow_credentials=True if FRONTEND_URL != "*" else False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
