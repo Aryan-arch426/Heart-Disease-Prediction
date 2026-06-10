@@ -1,0 +1,29 @@
+# ── Frontend ──────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# ── Backend ───────────────────────────────────────────
+backend/__pycache__/
+backend/*.py[cod]
+backend/model.pkl
+backend/heart_disease.db
+backend/data/
+backend/.env
+backend/venv/
+backend/.venv/
+
+# ── OS / IDE ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ── Flat-file leftovers (old root layout) ─────────────
+node_modules/
+__pycache__/
+model.pkl
+heart_disease.db
+data/
