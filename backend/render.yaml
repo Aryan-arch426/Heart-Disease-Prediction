@@ -8,4 +8,4 @@ services:
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: FRONTEND_URL
-        value: https://your-vercel-app.vercel.app   # ← replace after Vercel deploy
+        value: https://heart-disease-prediction-zeta.vercel.app
